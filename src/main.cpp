@@ -50,7 +50,7 @@ void updateLEDs() {
 
 void setup() {
     // Misc init
-    WiFi.mode(WIFI_STA);    // force initial wifi setting
+    WiFi.mode(WIFI_STA);    // force initial wifi setting for ESP32
     initNimbleConModule();  // initialize NimbleConModule devices
     while (!Serial);
 #ifdef DEBUG
@@ -60,7 +60,7 @@ void setup() {
 #endif
 
     // Wifi manager settings
-    wm.setClass("invert");
+    wm.setDarkMode(true);
     wm.setMinimumSignalQuality(10);
     wm.setConfigPortalBlocking(false);
     wm.setHostname(DEVICE_NAME);
