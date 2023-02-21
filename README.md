@@ -1,6 +1,17 @@
 # NimbleTCodeWifi
 
-A [Toy Code (T-Code) v0.3](https://github.com/multiaxis/tcode-spec) compatible Wifi/Websocket firmware implementation for the [NimbleConModule](https://shop.exploratorydevices.com/product/connectivity-module-dev-kit/) ([NimbleStroker](https://shop.exploratorydevices.com/)).
+Firmware that implements the [Toy Code (T-Code) v0.3](https://github.com/multiaxis/tcode-spec) protocol over Wifi/Websocket for the [NimbleConModule](https://shop.exploratorydevices.com/product/connectivity-module-dev-kit/), an ESP32 controller for the [NimbleStroker](https://shop.exploratorydevices.com/).
+
+Tested with MultiFunPlayer's WebSocket output type, which connects to a Websocket Server running on the NimbleConModule and sends T-Code commands as messages to the device. The T-Code commands are converted into position values which are then sent to the NimbleStroker actuator.
+
+To connect the NimbleConModule to your local network:
+1. Long press the encoder button until you see the flashing white Wifi LED. This indicates the device is in Local AP mode.
+2. Using any wifi-enabled device with a browser (computer, phone, tablet) connect to the newly created Access Point named `NimbleTCodeWifi`.
+3. Upon connecting, a Captive Portal should pop up, allowing you to configure the device for your local network, entering its SSID and password.
+4. After Saving the configuration, the device will reboot and connect to the network with a local IP address. A steady white LED indicates it is connected.
+5. From here you can connect to the websocket server and send commands. A blue LED will turn on when a client is connected.
+
+If the device fails to connect to the network (ie. incorrect password), it will re-enter Local AP mode, where you will need to reconnect and reattempt the configuration.
 
 ## TCode Information
 
@@ -37,6 +48,35 @@ Other info:
 5. Attach the NimbleConModule to the actuator (Label A)
    - Note: Pendant connection not supported
 6. Long press the Encoder Dial (2 seconds) to reset Wifi configuration and enable the configuration portal.
-   - TODO instructions
-7. Short press the Encoder Dial to toggle stop/start sending commands to the actuator
-8. Open the MultiFunPlayer application
+7. Short press click the Encoder Dial to toggle stop/start sending commands to the actuator.
+
+## Testing with MultiFunPlayer
+
+1. Launch the [MultiFunPlayer](https://github.com/Yoooi0/MultiFunPlayer) application.
+2. In the Output section, add a `WebSocket` device (plus sign).
+3. Set the websocket uri with the device's IP address (ie. `ws://192.168.1.100/ws`).
+4. Test the connection with the play button.
+5. (Optional) To configure additional axes (L0, V0, A0, A1, A2) for multi script support...
+6. Open the Output Configuration panel.
+7. Clone the `TCode-0.3 (default)` config, name it `NimbleTCode`.
+8. Enable the channels you'd like to use. ie.:
+   - `L0` Up/Down (Select "Load unnamed script") - Default value: `50%`
+   - `V0` Vibrate - Default value: `0%` (off state)
+   - `A0` Valve - Default value: `50%` (off state)
+   - `A1` Force (can rename) - Default value: `100%` (max)
+   - `A2` Vibspeed (can rename) - Default value: `100%` (max)
+9. See screenshots below.
+
+![MultiFunPlayer Device Config](./docs/MFP-device-config.jpg)
+
+![MultiFunPlayer WebSocket Device UI](./docs/MFP-ws-device-ui.jpg)
+
+## Attributions
+
+- <https://github.com/ExploratoryDevices/NimbleConModule> - Official NimbleConSDK
+- <https://github.com/tzapu/WiFiManager> - For Wifi Captive Portal functionality
+- <https://github.com/esphome/ESPAsyncWebServer> - For websocket server functionality
+- <https://github.com/tyrm/nimblestroker/> - Nimblestroker examples
+- <https://github.com/Dreamer2345/Arduino_TCode_Parser> - TCode library
+
+See also [platformio.ini](./platformio.ini) for other 3rd party OSS libraries used in this project.
