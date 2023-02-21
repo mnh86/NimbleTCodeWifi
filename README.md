@@ -1,6 +1,6 @@
 # NimbleTCodeWifi
 
-Firmware that implements the [Toy Code (T-Code) v0.3](https://github.com/multiaxis/tcode-spec) protocol over Wifi/Websocket for the [NimbleConModule](https://shop.exploratorydevices.com/product/connectivity-module-dev-kit/), an ESP32 controller for the [NimbleStroker](https://shop.exploratorydevices.com/).
+Firmware that implements the [Toy Code (T-Code) v0.3](https://github.com/multiaxis/tcode-spec) protocol over Wifi/Websocket for the [Nimble Connectivity Module](https://shop.exploratorydevices.com/product/connectivity-module-dev-kit/), an ESP32 controller for the [NimbleStroker](https://shop.exploratorydevices.com/).
 
 Tested with MultiFunPlayer's WebSocket output type, which connects to a Websocket Server running on the NimbleConModule and sends T-Code commands as messages to the device. The T-Code commands are converted into position values which are then sent to the NimbleStroker actuator.
 
@@ -48,7 +48,7 @@ Other info:
 5. Attach the NimbleConModule to the actuator (Label A)
    - Note: Pendant connection not supported
 6. Long press the Encoder Dial (2 seconds) to reset Wifi configuration and enable the configuration portal.
-7. Short press click the Encoder Dial to toggle stop/start sending commands to the actuator.
+7. Click the Encoder Dial to toggle stop/start sending commands to the actuator.
 
 ## Testing with MultiFunPlayer
 

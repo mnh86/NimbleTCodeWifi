@@ -166,6 +166,7 @@ void setup()
     btn.onPress(pressHandler)
         .onPressFor(pressHandler, 2000);
 
+    // Timers setup
     ledDelay.start(30);
     logDelay.start(1000);
 }
