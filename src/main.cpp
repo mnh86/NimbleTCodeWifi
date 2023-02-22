@@ -12,7 +12,7 @@ WiFiManager wm;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 
-#define FIRMWAREVERSION "NimbleStroker_TCode_Wifi_v0.1"
+#define FIRMWAREVERSION "NimbleStroker_TCode_Wifi_v0.2"
 
 NimbleTCode nimble(FIRMWAREVERSION);
 
@@ -144,10 +144,15 @@ void setupNetwork()
     clientCleanupDelay.start(1000);
 }
 
+void wsTCodeCallback(const String &input) {
+    ws.textAll(input);
+}
+
 void setup()
 {
     // Misc init
     WiFi.mode(WIFI_STA);    // force initial wifi setting for ESP32
+    nimble.setMessageCallback(wsTCodeCallback);
     nimble.init();          // initialize NimbleConModule devices
     nimble.stop();
     while (!Serial);

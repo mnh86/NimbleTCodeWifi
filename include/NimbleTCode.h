@@ -32,6 +32,7 @@ class NimbleTCode {
         void setVibrationAmplitude(uint16_t v) { vibrationAmplitude = min(max(v, (uint16_t)0), (uint16_t)VIBRATION_MAX_AMP); }
         void printFrameState(Print& out = Serial);
         bool isRunning() { return running; }
+        void setMessageCallback(TCODE_FUNCTION_PTR_T function) { tcode->setMessageCallback(function); }
 
     private:
         TCode<3> *tcode;
