@@ -24,6 +24,7 @@ void pressHandler(BfButton *btn, BfButton::press_pattern_t pattern)
     {
     case BfButton::SINGLE_PRESS:
         nimble.toggle();
+        if (!nimble.isRunning()) nimble.resetState();
         break;
 
     case BfButton::LONG_PRESS:
